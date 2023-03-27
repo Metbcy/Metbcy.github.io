@@ -1,21 +1,21 @@
 // Skills icons - https://react-icons.github.io/react-icons/
 import {
-  FaHtml5,
-  FaCss3Alt,
-  FaBootstrap,
+  FaJava,
   FaReact,
   FaGitAlt,
   FaGithubSquare,
   FaLink,
+  FaPython,
+  FaAws,
 } from "react-icons/fa";
-import { SiJavascript, SiStyledcomponents, SiRedux } from "react-icons/si";
+import { SiJavascript, SiHtml5, SiCplusplus } from "react-icons/si";
 
 // Projects Images (add your images to the images directory and import below)
 import Logo from "./images/logo.svg";
 
 // Hero Images (add your images to the /images directory with the same names)
-import HeroLight from "./images/hero-light.jpg";
-import HeroDark from "./images/hero-dark.jpg";
+import HeroLight from "./images/LightMode.jpg";
+import HeroDark from "./images/Dark1.jpg";
 // If you change the import names above then you need to change the export names below
 export { HeroLight as Light };
 export { HeroDark as Dark };
@@ -34,7 +34,7 @@ export const Blog = <FaLink />;
   Add a second paragraph for the about me section.
 */
 export const moreInfo =
-  " I’m currently working honing my Product Management Skills working on the Cloud. I’m looking to collaborate on exciting projects that can change the lives of others!";
+  "My name is Amir Bredy, I'm a Rising CS Senior currently studying @ the illustrious Howard University. I love exploring new technology when I have the chance and I will be working as a Product Management intern this summer @ Microsoft! I’ll be working on honing my Product Management skills working on the Cloud. I’m also looking to collaborate on exciting projects that can change the lives of others!";
 
 /* Skills
  ************************************************************** 
@@ -43,13 +43,13 @@ export const moreInfo =
 export const skillData = [
   {
     id: 1,
-    skill: <FaHtml5 className="display-4" />,
-    name: "HTML5",
+    skill: <FaJava className="display-4" />,
+    name: "Java",
   },
   {
     id: 2,
-    skill: <FaCss3Alt className="display-4" />,
-    name: "CSS3",
+    skill: <SiCplusplus className="display-4" />,
+    name: "C++",
   },
   {
     id: 3,
@@ -58,8 +58,8 @@ export const skillData = [
   },
   {
     id: 4,
-    skill: <FaBootstrap className="display-4" />,
-    name: "BootStrap",
+    skill: <FaAws className="display-4" />,
+    name: "AWS",
   },
   {
     id: 5,
@@ -68,13 +68,13 @@ export const skillData = [
   },
   {
     id: 6,
-    skill: <SiStyledcomponents className="display-4" />,
-    name: "Styled Components",
+    skill: <SiHtml5 className="display-4" />,
+    name: "HTML",
   },
   {
     id: 7,
-    skill: <SiRedux className="display-4" />,
-    name: "Redux",
+    skill: <FaPython className="display-4" />,
+    name: "Python",
   },
   {
     id: 8,
@@ -95,7 +95,7 @@ export const resume = "https://drive.google.com/file/d/1QsOors7s0f2bdo9z_DTBI8Sj
  ************************************************************** 
   List the repo names (string - "your-repo-name") you want to include (they will be sorted alphabetically). If empty, only the first 3 will be included.
 */
-export const filteredProjects = ["LSPGit", "DevYourOwnBenchmark", "RaspPiWasherSys"];
+export const filteredProjects = ["LSPGit", "DevYourOwnBenchmark", "FiboMips"];
 
 // Replace the defualt GitHub image for matching repos below (images imported above - lines 13-14)
 export const projectCardImages = [
