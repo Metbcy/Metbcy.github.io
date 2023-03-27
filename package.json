@@ -22,7 +22,8 @@
     "workbox-strategies": "^6.5.4"
   },
   "devDependencies": {
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "typescript": "^5.0.2"
   },
   "scripts": {
     "predeploy": "npm run build",
