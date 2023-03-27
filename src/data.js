@@ -4,7 +4,7 @@ import {
   FaReact,
   FaGitAlt,
   FaGithubSquare,
-  FaLink,
+  FaLinkedin,
   FaPython,
   FaAws,
 } from "react-icons/fa";
@@ -27,7 +27,7 @@ export { HeroDark as Dark };
 export const githubUsername = "Metbcy";
 
 // Blog link icon (imported above)
-export const Blog = <FaLink />;
+export const Blog = <FaLinkedin />;
 
 /* About Me
  **************************************************************
