@@ -34,7 +34,7 @@ export const Blog = <FaLinkedin />;
   Add a second paragraph for the about me section.
 */
 export const moreInfo =
-  "My name is Amir Bredy, I'm a Rising CS Senior currently studying @ the illustrious Howard University. I love exploring new technology when I have the chance and I will be working as a Product Management intern this summer @ Microsoft! I’ll be working on honing my Product Management skills working on the Cloud. I’m also looking to collaborate on exciting projects that can change the lives of others!";
+  "My name is Amir Bredy, I'm a Senior studying Computer Science @ the illustrious Howard University. I love exploring new technology and enhancing the efficiency of old tech. I will be working as a Product Management intern this summer @ Microsoft where I'll be working on honing my Product Management skills working on Cloud Technology. I’m also looking to collaborate on exciting projects that can change the lives of others!";
 
 /* Skills
  ************************************************************** 
