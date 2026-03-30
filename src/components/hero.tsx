@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, FileText } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icons";
 
 export default function Hero() {
@@ -62,6 +62,16 @@ export default function Hero() {
             aria-label="LinkedIn"
           >
             <LinkedinIcon size={20} />
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:border-neutral-400 dark:hover:border-neutral-600 transition-all text-sm font-mono"
+            aria-label="Resume"
+          >
+            <FileText size={16} />
+            Resume
           </a>
         </motion.div>
       </div>
