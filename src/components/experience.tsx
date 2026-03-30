@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "./section-heading";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const experiences = [
   {
@@ -50,6 +51,8 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section id="experience" className="py-24 bg-white dark:bg-[#0d0d0d]">
       <div className="max-w-5xl mx-auto px-6">
@@ -58,7 +61,7 @@ export default function Experience() {
           {experiences.map((exp, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -20 }}
+              initial={reducedMotion ? false : { opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}

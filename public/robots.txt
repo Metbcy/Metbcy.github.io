@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://metbcy.github.io/sitemap.xml

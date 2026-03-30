@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "./icons";
 import SectionHeading from "./section-heading";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-offset-neutral-950";
 
 const projects = [
   {
@@ -30,6 +34,8 @@ const projects = [
 ];
 
 export default function Projects() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section id="projects" className="py-24 bg-white dark:bg-[#0d0d0d]">
       <div className="max-w-5xl mx-auto px-6">
@@ -41,7 +47,7 @@ export default function Projects() {
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
@@ -50,7 +56,7 @@ export default function Projects() {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-[#141414] hover:border-neutral-400 dark:hover:border-neutral-600 hover:scale-[1.02] transition-all duration-200 h-full"
+                className={`group block p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-[#141414] hover:border-neutral-400 dark:hover:border-neutral-600 hover:scale-[1.02] transition-[border-color,transform] duration-200 h-full ${focusRing}`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-semibold text-neutral-900 dark:text-[#ededed] group-hover:text-blue-500 transition-colors">
@@ -80,7 +86,7 @@ export default function Projects() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={reducedMotion ? false : { opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -90,7 +96,7 @@ export default function Projects() {
             href="https://github.com/Metbcy"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-blue-500 transition-colors"
+            className={`inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-blue-500 transition-colors ${focusRing}`}
           >
             <GithubIcon size={16} />
             View all projects

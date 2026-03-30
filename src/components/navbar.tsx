@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "./theme-provider";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -13,21 +14,34 @@ const navLinks = [
   { href: "#contact", label: "Contact" },
 ];
 
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-offset-neutral-950";
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const reducedMotion = useReducedMotion();
+  const ticking = useRef(false);
+
+  const handleScroll = useCallback(() => {
+    if (ticking.current) return;
+    ticking.current = true;
+    requestAnimationFrame(() => {
+      setScrolled(window.scrollY > 10);
+      ticking.current = false;
+    });
+  }, []);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   return (
     <nav
       aria-label="Main navigation"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
         scrolled
           ? "bg-neutral-50/80 dark:bg-neutral-950/80 backdrop-blur-lg border-b border-neutral-200 dark:border-neutral-800"
           : "bg-transparent"
@@ -36,7 +50,7 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-6 flex items-center justify-between h-16">
         <a
           href="#"
-          className="font-mono text-lg font-bold tracking-tight text-neutral-900 dark:text-[#ededed]"
+          className={`font-mono text-lg font-bold tracking-tight text-neutral-900 dark:text-[#ededed] ${focusRing}`}
         >
           AB
         </a>
@@ -46,14 +60,14 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors"
+              className={`text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors ${focusRing}`}
             >
               {link.label}
             </a>
           ))}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            className={`p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors ${focusRing}`}
             aria-label="Toggle theme"
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -63,14 +77,14 @@ export default function Navbar() {
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors"
+            className={`p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors ${focusRing}`}
             aria-label="Toggle theme"
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors"
+            className={`p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors ${focusRing}`}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -82,9 +96,9 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
+            initial={reducedMotion ? false : { opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            exit={reducedMotion ? undefined : { opacity: 0, height: 0 }}
             className="md:hidden overflow-hidden bg-neutral-50/95 dark:bg-neutral-950/95 backdrop-blur-lg border-b border-neutral-200 dark:border-neutral-800"
           >
             <div className="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-4">
@@ -93,7 +107,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors"
+                  className={`text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors ${focusRing}`}
                 >
                   {link.label}
                 </a>

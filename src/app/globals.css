@@ -13,9 +13,21 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: #d4d4d4 transparent;
+}
+
+html.dark {
+  scrollbar-color: #262626 transparent;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #262626 transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

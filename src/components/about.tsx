@@ -2,15 +2,18 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "./section-heading";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export default function About() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section id="about" className="py-24 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeading title="About" />
         <div className="grid md:grid-cols-3 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={reducedMotion ? false : { opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -30,7 +33,7 @@ export default function About() {
             </p>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -39,6 +42,9 @@ export default function About() {
             <img
               src="/photo.jpg"
               alt="Amir Bredy"
+              width={160}
+              height={160}
+              loading="lazy"
               className="w-40 h-40 rounded-full object-cover border-2 border-neutral-200 dark:border-neutral-700"
             />
           </motion.div>

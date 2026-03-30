@@ -3,8 +3,14 @@
 import { motion } from "framer-motion";
 import { ChevronDown, FileText } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icons";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-offset-neutral-950";
 
 export default function Hero() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-neutral-50 dark:bg-neutral-950">
@@ -13,16 +19,16 @@ export default function Hero() {
 
       <div className="relative max-w-5xl mx-auto px-6 text-center">
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-5xl md:text-7xl font-bold tracking-tight text-neutral-900 dark:text-[#ededed]"
+          className="text-5xl md:text-7xl font-bold tracking-tight text-neutral-900 dark:text-[#ededed] text-balance"
         >
           Amir Bredy
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           className="mt-4 text-lg md:text-xl font-mono text-blue-500"
@@ -31,7 +37,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           className="mt-6 text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto text-lg"
@@ -40,7 +46,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
           className="mt-8 flex items-center justify-center gap-4"
@@ -49,7 +55,7 @@ export default function Hero() {
             href="https://github.com/Metbcy"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:border-neutral-400 dark:hover:border-neutral-600 transition-all"
+            className={`p-3 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors ${focusRing}`}
             aria-label="GitHub"
           >
             <GithubIcon size={20} />
@@ -58,7 +64,7 @@ export default function Hero() {
             href="https://linkedin.com/in/amirbredy"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:border-neutral-400 dark:hover:border-neutral-600 transition-all"
+            className={`p-3 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors ${focusRing}`}
             aria-label="LinkedIn"
           >
             <LinkedinIcon size={20} />
@@ -67,7 +73,7 @@ export default function Hero() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:border-neutral-400 dark:hover:border-neutral-600 transition-all text-sm font-mono"
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors text-sm font-mono ${focusRing}`}
             aria-label="Resume"
           >
             <FileText size={16} />
@@ -78,8 +84,12 @@ export default function Hero() {
 
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        animate={reducedMotion ? undefined : { y: [0, 8, 0] }}
+        transition={
+          reducedMotion
+            ? undefined
+            : { duration: 2, repeat: Infinity, ease: "easeInOut" }
+        }
         aria-hidden="true"
       >
         <ChevronDown size={24} className="text-neutral-400" />

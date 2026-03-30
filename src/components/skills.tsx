@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import SectionHeading from "./section-heading";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const skillCategories = [
   {
@@ -31,6 +32,8 @@ const skillCategories = [
 ];
 
 export default function Skills() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section id="skills" className="py-24 bg-neutral-50 dark:bg-neutral-950">
       <div className="max-w-5xl mx-auto px-6">
@@ -39,7 +42,7 @@ export default function Skills() {
           {skillCategories.map((category, i) => (
             <motion.div
               key={category.label}
-              initial={{ opacity: 0, y: 20 }}
+              initial={reducedMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}

@@ -1,5 +1,8 @@
 import { GithubIcon, LinkedinIcon } from "./icons";
 
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-offset-neutral-950";
+
 export default function Footer() {
   return (
     <footer className="border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950">
@@ -10,7 +13,7 @@ export default function Footer() {
             href="https://github.com/Metbcy"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neutral-500 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors"
+            className={`text-neutral-500 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors ${focusRing}`}
             aria-label="GitHub"
           >
             <GithubIcon size={18} />
@@ -19,7 +22,7 @@ export default function Footer() {
             href="https://linkedin.com/in/amirbredy"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neutral-500 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors"
+            className={`text-neutral-500 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors ${focusRing}`}
             aria-label="LinkedIn"
           >
             <LinkedinIcon size={18} />
