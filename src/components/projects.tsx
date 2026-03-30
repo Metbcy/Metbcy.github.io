@@ -1,0 +1,102 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { GithubIcon } from "./icons";
+import SectionHeading from "./section-heading";
+
+const projects = [
+  {
+    title: "LSPGit",
+    description:
+      "A Language Server Protocol implementation for Git that brings IDE-like intelligence — diagnostics, completions, and hover info — to Git workflows.",
+    tags: ["Git", "LSP", "Developer Tools"],
+    github: "https://github.com/Metbcy/LSPGit",
+  },
+  {
+    title: "DevYourOwnBenchmark",
+    description:
+      "A framework for designing and running custom performance benchmarks, enabling repeatable comparisons across implementations and hardware.",
+    tags: ["Performance", "Testing", "Benchmarking"],
+    github: "https://github.com/Metbcy/DevYourOwnBenchmark",
+  },
+  {
+    title: "FiboMips",
+    description:
+      "Fibonacci sequence computation in MIPS assembly — a deep dive into low-level programming, register management, and recursive function calls.",
+    tags: ["Assembly", "MIPS", "Computer Architecture"],
+    github: "https://github.com/Metbcy/FiboMips",
+  },
+];
+
+export default function Projects() {
+  return (
+    <section id="projects" className="py-24 bg-white dark:bg-[#0d0d0d]">
+      <div className="max-w-5xl mx-auto px-6">
+        <SectionHeading title="Projects" />
+        <p className="text-neutral-500 dark:text-neutral-400 text-sm mb-8 -mt-4 font-mono">
+          University &amp; personal projects
+        </p>
+        <div className="grid md:grid-cols-3 gap-6">
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-[#141414] hover:border-neutral-400 dark:hover:border-neutral-600 hover:scale-[1.02] transition-all duration-200 h-full"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-neutral-900 dark:text-[#ededed] group-hover:text-blue-500 transition-colors">
+                    {project.title}
+                  </h3>
+                  <ArrowUpRight
+                    size={16}
+                    className="text-neutral-400 group-hover:text-blue-500 transition-colors"
+                  />
+                </div>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs px-2 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 font-mono"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </a>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8 text-center"
+        >
+          <a
+            href="https://github.com/Metbcy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-blue-500 transition-colors"
+          >
+            <GithubIcon size={16} />
+            View all projects
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
