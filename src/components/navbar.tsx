@@ -1,17 +1,19 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useTheme } from "./theme-provider";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/notes", label: "Notes" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 const focusRing =
@@ -48,22 +50,22 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-5xl mx-auto px-6 flex items-center justify-between h-16">
-        <a
-          href="#"
+        <Link
+          href="/"
           className={`font-mono text-lg font-bold tracking-tight text-neutral-900 dark:text-[#ededed] ${focusRing}`}
         >
           AB
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className={`text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors ${focusRing}`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <button
             onClick={toggleTheme}
@@ -103,14 +105,14 @@ export default function Navbar() {
           >
             <div className="max-w-5xl mx-auto px-6 py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
                   className={`text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-[#ededed] transition-colors ${focusRing}`}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>

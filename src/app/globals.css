@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "highlight.js/styles/github-dark.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -31,3 +32,80 @@ html.dark {
     scroll-behavior: auto !important;
   }
 }
+
+/* Notes prose — minimal typography for /notes/[slug] body. */
+.note-prose {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.note-prose > * + * { margin-top: 1.25em; }
+.note-prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2em;
+  color: rgb(23 23 23);
+}
+.note-prose h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.75em;
+  color: rgb(23 23 23);
+}
+html.dark .note-prose h2,
+html.dark .note-prose h3 { color: rgb(237 237 237); }
+
+.note-prose a {
+  color: rgb(59 130 246);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.note-prose a:hover { text-decoration-thickness: 2px; }
+
+.note-prose ul { list-style: disc; padding-left: 1.5em; }
+.note-prose ol { list-style: decimal; padding-left: 1.5em; }
+.note-prose li + li { margin-top: 0.5em; }
+.note-prose li > p { margin: 0; }
+.note-prose li > ul, .note-prose li > ol { margin-top: 0.5em; }
+
+.note-prose blockquote {
+  border-left: 3px solid rgb(59 130 246);
+  padding-left: 1em;
+  font-style: italic;
+  color: rgb(82 82 82);
+}
+html.dark .note-prose blockquote { color: rgb(163 163 163); }
+
+.note-prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.35em;
+  border-radius: 0.25rem;
+  background: rgb(245 245 245);
+  color: rgb(23 23 23);
+}
+html.dark .note-prose code:not(pre code) {
+  background: rgb(38 38 38);
+  color: rgb(237 237 237);
+}
+
+.note-prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 1em 1.25em;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  border: 1px solid rgb(229 229 229);
+}
+html.dark .note-prose pre {
+  border-color: rgb(38 38 38);
+}
+.note-prose pre code { background: transparent; padding: 0; }
+
+.note-prose hr {
+  border: none;
+  border-top: 1px solid rgb(229 229 229);
+  margin: 2em 0;
+}
+html.dark .note-prose hr { border-top-color: rgb(38 38 38); }
