@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Inter, JetBrains_Mono, Newsreader } from "next/font/google";
+import { profile } from "@/content/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,56 +8,62 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+});
+
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
+const title = `${profile.name} · Technical Program Manager, Edge Security`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://metbcy.github.io"),
-  title: "Amir Bredy — Technical Program Manager at Microsoft",
-  description:
-    "Portfolio of Amir Bredy, Technical Program Manager II at Microsoft. Edge Security, Cloud Infrastructure, and AI.",
+  metadataBase: new URL(profile.site),
+  title,
+  description: profile.description,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Amir Bredy — Technical Program Manager at Microsoft",
-    description:
-      "Portfolio of Amir Bredy, Technical Program Manager II at Microsoft. Edge Security, Cloud Infrastructure, and AI.",
+    title,
+    description: profile.description,
     type: "website",
-    url: "https://metbcy.github.io",
+    url: profile.site,
+    siteName: profile.name,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${profile.name}, ${profile.role}` }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amir Bredy — Technical Program Manager at Microsoft",
-    description:
-      "Portfolio of Amir Bredy, Technical Program Manager II at Microsoft. Edge Security, Cloud Infrastructure, and AI.",
+    images: ["/og.png"],
+    title,
+    description: profile.description,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f4ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#121210" },
   ],
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Amir Bredy",
-  url: "https://metbcy.github.io",
-  jobTitle: "Technical Program Manager II",
+  name: profile.name,
+  url: profile.site,
+  email: `mailto:${profile.email}`,
+  jobTitle: profile.role,
   worksFor: { "@type": "Organization", name: "Microsoft" },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Howard University" },
-  sameAs: [
-    "https://github.com/Metbcy",
-    "https://linkedin.com/in/amirbredy",
-  ],
+  sameAs: [profile.github, profile.linkedin],
 };
+
+// Runs before paint so there is no flash: a saved choice wins, otherwise follow the system.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");var d=t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.classList.toggle("dark",d)}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -68,27 +74,20 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}
     >
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){document.documentElement.classList.remove("dark")}else{document.documentElement.classList.add("dark")}}catch(e){document.documentElement.classList.add("dark")}})();`,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-[#ededed] font-sans antialiased">
-        <a
-          href="#main-content"
-          className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:px-4 focus-visible:py-2 focus-visible:rounded-lg focus-visible:bg-blue-500 focus-visible:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-offset-neutral-950"
-        >
+      <body>
+        <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <ThemeProvider>{children}</ThemeProvider>
+        {children}
       </body>
     </html>
   );
